@@ -1,0 +1,27 @@
+{
+  "name": "demand-scheduler",
+  "version": "1.0.0",
+  "description": "Organizador de Demandas",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build",
+    "build": "webpack -d && copy D:\\Projetos\\demand-scheduler\\src\\index.html D:\\Projetos\\demand-scheduler\\dist\\index.html && webpack-dev-server --content-base src/ --inline --hot",
+    "build:prod": "webpack -p && copy D:\\Projetos\\demand-scheduler\\src\\index.html D:\\Projetos\\demand-scheduler\\dist\\index.html"
+  },
+  "author": "Rodolpho Loreto - OmniaTEC",
+  "license": "ISC",
+  "dependencies": {
+    "react-dom": "^15.4.2",
+    "reactjs": "^1.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-2": "^6.22.0",
+    "webpack": "^2.3.2",
+    "webpack-dev-server": "^2.4.2"
+  }
+}
