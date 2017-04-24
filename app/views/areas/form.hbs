@@ -1,0 +1,91 @@
+<div class="section section-primary text-center" style="width: 100%; background-color:white;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <ul class="breadcrumb text-left breadcrumb-custom">
+                    <li>
+                        <a href="#">cadastros</a>
+                    </li>
+                    <li>
+                        <a href="#" class="active">áreas</a>
+                    </li>
+                </ul>
+                <h2 class="text-left">Cadastro de Áreas</h2>
+                <br>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <form class="form-horizontal" role="form">
+                    <input type="hidden" value="{{operacao}}" id="operacao"/>
+                    <input type="hidden" value="{{selectedArea._id}}" id="idArea" />
+                    <div class="form-group">
+                        
+                        <div class="col-sm-2">
+                            <label for="nome" class="control-label">Nome</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="nome" placeholder="Ex. Financeiro, Jurídico, Vendas etc." value="{{selectedArea.nome}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label for="peso" class="control-label">Peso</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="peso" style="max-width: 95px" min="1" max="5" value="{{selectedArea.peso}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="button" class="btn btn-lg btn-danger pull-right" style="margin: 10px 00px 0px 10px" value="Cancelar" onclick="window.open('/areas','_self');">
+                            <input type="submit" class="btn btn-lg btn-success pull-right" style="margin: 10px 0px 0px 10px;" value="Salvar" id="btnSalvar">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+
+$(function(){
+
+
+    $('#btnSalvar').click(function(){
+
+
+
+            if ($('#operacao').val() == 'insert' ){
+
+                $.post('/areas/insert',
+                {nome: $('#nome').val(),
+                 peso: $('#peso').val()},
+                function(){
+                  documento.location.href = '/areas/insert';
+                });
+
+            } 
+            else if($('#operacao').val() == "editar") {
+                $.post('/areas/editar',{
+                                        id: $("#idArea").val(),
+                                        nome: $('#nome').val(),
+                                        peso: $('#peso').val()
+                                       },
+                function(){
+                   
+                   document.location.href = '/areas';
+
+                });
+            }
+
+
+    });
+
+});
+
+
+</script>
