@@ -6788,3 +6788,8 @@ body {
   opacity: 1;
   color: #ffffff;
 }
+
+.table > tbody > tr > td {
+  
+     vertical-align: middle;
+}

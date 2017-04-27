@@ -10,19 +10,16 @@ Areas.find(function(err,areas) {
 
     
     
-    var successMsg = req.flash('success')[0];
-    var listaArea = [];
-    for(var i = 0; i < areas.length; i++){
-      listaArea.push(areas[i]);
-    }
+      var successMsg = req.flash('success')[0];
+      var listaArea = [];
+      for(var i = 0; i < areas.length; i++){
+        listaArea.push(areas[i]);
+      }
 
-    res.render('areas/list',{listaAreas: listaArea});
+      res.render('areas/list',{listaAreas: listaArea});
 
 
-});
-
-  
-
+  });
 
 });
 

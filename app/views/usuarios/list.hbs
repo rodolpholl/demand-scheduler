@@ -1,0 +1,74 @@
+<div class="section section-primary text-center" style="width: 100%; background-color:white;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="breadcrumb text-left breadcrumb-custom">
+          <li>
+            <a href="#">cadastros</a>
+          </li>
+          <li>
+            <a href="#" class="active">usuários</a>
+          </li>
+        </ul>
+        <h2 class="text-left">Cadastro de Usuários</h2>
+        <br>
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 text-left">
+        <a class="btn btn-primary btn-lg" href="/usuarios/insert"><span><i class="glyphicon glyphicon-plus-sign"></i></span></a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table">
+          <thead>
+            <tr>
+
+              <th>Nome</th>
+              <th>E-mail</th>
+              <th>Login</th>
+              <th>Peso</th>
+              <th>Áreas Associadas</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            {{# each listaUsuarios}}
+            <tr>
+
+              <td><a href="/usuarios/editar/{{this._id}}" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>                {{this.nome}}</td>
+              <td>{{this.email}}</td>
+              <td>{{this.login}}</td>
+              <td>{{this.peso}}</td>
+              <td>
+
+                <ul>
+                  {{#if this.possuiAreasVinculadas}} 
+                    {{# each this.areasVinculadas}}
+
+                    <li>
+                      {{this.nome}}
+                    </li>
+
+                    {{/each}} 
+
+                  {{else}}
+
+                    <i>Não existem áreas vinculadas a este usuário</i> 
+                    
+                  {{/if}}
+                </ul>
+
+              </td>
+            </tr>
+            {{/each}}
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

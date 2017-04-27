@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 mongoose.Promise = require('bluebird');
+var Areas = require('./area');
 
 
 var Schema = mongoose.Schema;
@@ -9,7 +10,10 @@ var userSchema = new Schema({
 
     nome: {type: String, require: true},
     email: {type: String, require: true},
-    password: {type: String, require: true}
+    login: {type: String, require: true, unique: true},
+    peso: {type: Number, required: true},
+    password: {type: String, require: true},
+    areasVinculadas:[{ type: Schema.Types.ObjectId, ref: "Area"}]
 
 });
 

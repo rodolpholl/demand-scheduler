@@ -1,0 +1,156 @@
+<div class="section section-primary text-center" style="width: 100%; background-color:white;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <ul class="breadcrumb text-left breadcrumb-custom">
+                    <li>
+                        <a href="#">cadastros</a>
+                    </li>
+                    <li>
+                        <a href="#" class="active">usuários</a>
+                    </li>
+                </ul>
+                <h2 class="text-left">Cadastro de Usuários</h2>
+                <br>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <form class="form-horizontal" role="form">
+                    <input type="hidden" value="{{operacao}}" id="operacao"/>
+                    <input type="hidden" value="{{selectedUser._id}}" id="idUsuario" />
+                    <div class="form-group">
+                        
+                        <div class="col-sm-2">
+                            <label for="nome" class="control-label">Nome</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="nome" placeholder="Ex. José Eduardo de Oliveira, Paulo Ricardo de Azevedo, etc." value="{{selectedUser.nome}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        
+                        <div class="col-sm-2">
+                            <label for="nome" class="control-label">Login</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="login" placeholder="Ex. JEduardo, pricardo, etc." value="{{selectedUser.login}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        
+                        <div class="col-sm-2">
+                            <label for="nome" class="control-label">E-mail</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="email" placeholder="Ex. usuario@email.com.br." value="{{selectedUser.email}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label for="peso" class="control-label">Peso</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="peso" style="max-width: 95px" min="1" max="5" value="{{selectedUser.peso}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label for="listaAreas" class="control-label">Areas</label>
+                        </div>
+                        <div class="col-sm-10">
+                           <div id="listaAreas" class="col-xs-1">
+
+                                {{# each listaAreas}}
+                                    
+                                    <div class="checkbox " class="col-xs-1"> 
+                                    
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" id="{{this.id}}_chk" value="{{this.id}}" {{#if this.selected}} checked {{/if}}/>
+                                            {{this.nome}}
+                                        </lable>
+
+                                    </div>
+
+                                    
+                                {{/each}}
+
+                           </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="button" class="btn btn-lg btn-danger pull-right" style="margin: 10px 00px 0px 10px" value="Cancelar" onclick="window.open('/usuarios','_self');">
+                            <input type="submit" class="btn btn-lg btn-success pull-right" style="margin: 10px 0px 0px 10px;" value="Salvar" id="btnSalvar">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+
+$(function(){
+
+
+    $('#btnSalvar').click(function(){
+
+
+
+            if ($('#operacao').val() == 'insert' ){
+
+                $.post('/usuarios/insert',
+                {
+                    nome: $('#nome').val(),
+                    login: $("#login").val(),
+                    peso: $('#peso').val(),
+                    email: $("#email").val(),
+                    areasSelecionadas: getSelectedAreas()
+                },
+                function(){
+                  documento.location.href = '/usuarios/insert';
+                });
+
+            } 
+            else if($('#operacao').val() == "editar") {
+                $.post('/usuarios/editar',
+                {
+                    id: $("#idUsuario").val(),
+                    nome: $('#nome').val(),
+                    login: $("#login").val(),
+                    peso: $('#peso').val(),
+                    email: $("#email").val(),
+                    areasSelecionadas: getSelectedAreas()
+                },
+                function(){
+                   
+                   document.location.href = '/usuarios';
+
+                });
+            }
+
+
+    });
+
+    function getSelectedAreas(){
+
+        var checkboxes = $("[id$='_chk']");
+        var retorno = [];
+
+        for(var i = 0; i < checkboxes.length; i++){
+            if ($(checkboxes[i]).is(":checked"))
+                retorno.push($(checkboxes[i]).val());
+        }
+
+        return retorno.toString();
+
+    };
+
+});
+
+
+</script>

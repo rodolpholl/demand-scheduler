@@ -22,6 +22,7 @@ mongoose.connect('localhost:27017/demands-scheduler');
 var index = require('./routes/index');
 var dashboard = require('./routes/dashboard');
 var areas = require('./routes/areas');
+var usuarios = require('./routes/usuarios');
 
 
 var app = express();
@@ -56,6 +57,7 @@ app.use(validator());
 app.use('/', index);
 app.use('/dashboard',dashboard);
 app.use('/areas',areas);
+app.use('/usuarios',usuarios);
 
 
 // catch 404 and forward to error handler
